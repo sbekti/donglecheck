@@ -7,6 +7,7 @@ WORKDIR /go/src/donglecheck
 RUN glide update && go build -o main
 
 FROM alpine
+RUN apk add --no-cache ca-certificates
 WORKDIR /app
 COPY --from=build-env /go/src/donglecheck/main /app/
 ENTRYPOINT ["./main"]
